@@ -1,0 +1,19 @@
+sudo: required
+dist: trusty
+language: go
+go:
+  - "1.11.x"
+  - tip
+
+install:
+  - go get -t github.com/laqpay/laqencoder/...
+  - go install github.com/laqpay/laqencoder/cmd/laqencoder
+
+script:
+  - make check
+  - laqencoder -struct DemoStruct github.com/laqpay/laqencoder/tests
+
+notifications:
+  # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+
